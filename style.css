@@ -1,3 +1,19 @@
 body {
-    background-image: url('https://ak.picdn.net/shutterstock/videos/1012349138/thumb/1.jpg');
+    background-image: url('https://ak.picdn.net/shutterstock/videos/820228/thumb/1.jpg');
+    background-repeat: no-repeat;
+    background-size: 1500px 1000px;
+}
+
+.container {
+    justify-content: center;
+    display: flex;
+    align-items: center;
+
+}
+
+.card {
+    justify-content: center;
+    display: flex;
+    align-items: center;
+
 }
