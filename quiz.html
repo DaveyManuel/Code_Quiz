@@ -10,16 +10,38 @@
 <body>
 
 <div class="container">
-    <div class="row">
-        <div class="col-sm">
-            <div class="card">
-                <div id="questionContainer">QUESTION</div>
-                <div id="multipleChoice">
-                    <button>CHOICE 1</button>
-                    <button>CHOICE 2</button>
-                    <button>CHOICE 3</button>
-                    <button>CHOICE 4</button>
-                </div>
+    <div class="row mt-5"></div>
+    <div class="row mt-5">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-8 mt-5">
+            <div class="card mt-5 bg-dark text-white">
+                <div class="mb-3" id="questionContainer">QUESTION</div>
+                <div class="mb-3"id="multipleChoice">
+                    <div class="form-check mb-2">
+                        <input class="form-check-input" type="checkbox" value="" id="question1">
+                        <label class="form-check-label" for="question1">
+                          ANSWER A
+                        </label>
+                      </div>
+                      <div class="form-check mb-2">
+                        <input class="form-check-input" type="checkbox" value="" id="question2">
+                        <label class="form-check-label" for="question2">
+                          ANSWER B
+                        </label>
+                      </div>
+                      <div class="form-check mb-2">
+                        <input class="form-check-input" type="checkbox" value="" id="question3">
+                        <label class="form-check-label" for="question3">
+                          ANSWER C
+                        </label>
+                      </div>
+                      <div class="form-check mb-2">
+                        <input class="form-check-input" type="checkbox" value="" id="question4">
+                        <label class="form-check-label" for="question4">
+                          ANSWER D
+                        </label>
+                      </div>
+                    </div>
                 <div id="next">
                     <button>NEXT</button>
                 </div>

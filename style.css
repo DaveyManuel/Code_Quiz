@@ -4,16 +4,8 @@ body {
     background-size: 1500px 1000px;
 }
 
-.container {
-    justify-content: center;
-    display: flex;
-    align-items: center;
-
-}
 
 .card {
-    justify-content: center;
-    display: flex;
-    align-items: center;
+  padding: 30px;
 
 }
