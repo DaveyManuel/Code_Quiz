@@ -24,7 +24,7 @@ let potentialQuestions = [
         choice2: 'Array',
         choice3: 'Let',
         choice4: 'Const',
-       // answer: 2,
+        answer: 'Array',
     },
     {
         question: 'What word is used to complete an if statement?',
@@ -86,16 +86,16 @@ let potentialQuestions = [
         question: 'The .setAttribute method is used to...',
         choice1: 'add functionality to an element',
         choice2: 'link our JS with our HTML',
-        choice3: 'add a class to an element',
+        choice3: 'add a class to an element', 
         choice4: 'none of the above',
        // answer: 3,
     },
     {
         question: 'Which tag is used in HTML to link our JavaScript',
-        choice1: '<script></script>',
-        choice2: '<link>',
-        choice3: '<src>',
-        choice4: '<java></java>',
+        choice1: 'script', 
+        choice2: 'link',
+        choice3: 'src',
+        choice4: 'java',
         // answer: 1,
     },
 
@@ -111,15 +111,44 @@ function startGame(){
 
 function setQuestion(){
 
-    multipleChoiceQuestion.innerHTML = potentialQuestions[currentQuestion].question
+
+    multipleChoiceQuestion.textContent = potentialQuestions[currentQuestion].question
     currentQuestion += 1
 
 
-    potentialMultChoice1.innerHTML = potentialQuestions[currentMultChoice].choice1
-    potentialMultChoice2.innerHTML = potentialQuestions[currentMultChoice].choice2
-    potentialMultChoice3.innerHTML = potentialQuestions[currentMultChoice].choice3
-    potentialMultChoice4.innerHTML = potentialQuestions[currentMultChoice].choice4
+    potentialMultChoice1.textContent = potentialQuestions[currentMultChoice].choice1
+    potentialMultChoice2.textContent = potentialQuestions[currentMultChoice].choice2
+    potentialMultChoice3.textContent = potentialQuestions[currentMultChoice].choice3
+    potentialMultChoice4.textContent = potentialQuestions[currentMultChoice].choice4
     currentMultChoice += 1
+
+
+  potentialMultChoice1.addEventListener("click", function(){
+
+    console.log(potentialQuestions[currentMultChoice].answer);
+
+    if (potentialMultChoice1.textContent === potentialQuestions[currentMultChoice].answer) {
+        alert("right");
+    } else {
+        alert("wrong");
+    }
+  })
+
+  potentialMultChoice2.addEventListener("click", function(){
+
+    if (potentialMultChoice2.textContent === potentialQuestions[currentMultChoice].answer) {
+        alert("right");
+    } else {
+        alert("wrong");
+    }
+
+    console.log(potentialMultChoice2.textContent);
+    console.log(potentialQuestions[currentMultChoice].answer);
+    
+  });
+
+console.log(potentialQuestions[currentMultChoice].answer)
+  
 
     
 
@@ -143,3 +172,7 @@ function nextQuestion(){
 
 nextQuestion();
 
+
+
+// in if statements if get right increment score 
+//take away time if wrong
