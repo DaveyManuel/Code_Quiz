@@ -32,7 +32,7 @@ let potentialQuestions = [
         choice2: 'while',
         choice3: 'else',
         choice4: 'else if',
-        // answer: 3,
+        answer: 'else',
     },
     {
         question: 'What kind of operator is used to describe if a value is true or false?',
@@ -40,7 +40,7 @@ let potentialQuestions = [
         choice2: 'String',
         choice3: 'Number',
         choice4: 'Object',
-        // answer: 1,
+        answer: 'Boolean',
     },
     {
         question: 'What JavaScript method do we use in order to turn a string into an integer?',
@@ -48,7 +48,7 @@ let potentialQuestions = [
         choice2: 'concat',
         choice3: 'parseInt',
         choice4: 'toUpperCase',
-       // answer: 3,
+        answer: 'parseInt',
     },
     {
         question: 'To successfully create a function, one must end the function with a ',
@@ -56,7 +56,7 @@ let potentialQuestions = [
         choice2: 'parenthesis ()',
         choice3: 'bracket []',
         choice4: 'period .',
-        // answer: 1,
+        answer: 'curly brace {}',
     },
     {
         question: 'This function is primarily used for debugging purposes:',
@@ -64,7 +64,7 @@ let potentialQuestions = [
         choice2: 'printInfo',
         choice3: 'find',
         choice4: 'console.log',
-        // answer: 4,
+        answer: 'console.log',
     },
     {
         question: 'To refactor code is to...',
@@ -72,7 +72,7 @@ let potentialQuestions = [
         choice2: 'organize code',
         choice3: 'simplify code',
         choice4: 'all of the above',
-        // answer: 4,
+        answer: 'all of the above',
     },
     {
         question: 'Which DOM method do we primarily use to select any element from our HTML',
@@ -80,7 +80,7 @@ let potentialQuestions = [
         choice2: 'querySelector',
         choice3: 'find',
         choice4: 'getElementbyId',
-        // answer: 2,
+        answer: 'querySelector',
     },
     {
         question: 'The .setAttribute method is used to...',
@@ -88,7 +88,7 @@ let potentialQuestions = [
         choice2: 'link our JS with our HTML',
         choice3: 'add a class to an element', 
         choice4: 'none of the above',
-       // answer: 3,
+        answer: 'add a class to an element',
     },
     {
         question: 'Which tag is used in HTML to link our JavaScript',
@@ -96,7 +96,7 @@ let potentialQuestions = [
         choice2: 'link',
         choice3: 'src',
         choice4: 'java',
-        // answer: 1,
+        answer: 'script',
     },
 
 ]
@@ -122,37 +122,6 @@ function setQuestion(){
     potentialMultChoice4.textContent = potentialQuestions[currentMultChoice].choice4
     currentMultChoice += 1
 
-
-  potentialMultChoice1.addEventListener("click", function(){
-
-    console.log(potentialQuestions[currentMultChoice].answer);
-
-    if (potentialMultChoice1.textContent === potentialQuestions[currentMultChoice].answer) {
-        alert("right");
-    } else {
-        alert("wrong");
-    }
-  })
-
-  potentialMultChoice2.addEventListener("click", function(){
-
-    if (potentialMultChoice2.textContent === potentialQuestions[currentMultChoice].answer) {
-        alert("right");
-    } else {
-        alert("wrong");
-    }
-
-    console.log(potentialMultChoice2.textContent);
-    console.log(potentialQuestions[currentMultChoice].answer);
-    
-  });
-
-console.log(potentialQuestions[currentMultChoice].answer)
-  
-
-    
-
-
     //let newQuestion = Math.floor(Math.random()*potentialQuestions.length)
    // currentQuestion = potentialQuestions[newQuestion]
 
@@ -169,10 +138,82 @@ function nextQuestion(){
 
 }
 
+function checkQuestion(){
 
+    
+    for (let index = 0; index < potentialQuestions.length; index++) {
+        
+        if (potentialMultChoice1.textContent === potentialQuestions[index].answer || potentialMultChoice2.textContent === potentialQuestions[index].answer || potentialMultChoice3.textContent === potentialQuestions[index].answer || potentialMultChoice4.textContent === potentialQuestions[index].answer) {
+            score += 1;
+            scoreNumber.textContent = score
+        } else {
+            
+        
+    }
+        }
+}
+
+function multChoiceBtn () {
+
+    potentialMultChoice1.addEventListener("click", checkQuestion);
+    potentialMultChoice2.addEventListener("click", checkQuestion);
+    potentialMultChoice3.addEventListener("click", checkQuestion);
+    potentialMultChoice4.addEventListener("click", checkQuestion);
+
+}
+
+setQuestion();
+multChoiceBtn();
 nextQuestion();
 
 
 
 // in if statements if get right increment score 
 //take away time if wrong
+
+
+// potentialMultChoice1.addEventListener("click", function(){
+
+
+//     if (potentialMultChoice1.textContent === potentialQuestions[currentMultChoice].answer) {
+//         alert("right");
+//     } else {
+//         alert("wrong");
+//     }
+//   })
+
+//   potentialMultChoice2.addEventListener("click", function(){
+
+//     if (potentialMultChoice2.textContent === potentialQuestions[currentMultChoice].answer) {
+//         alert("right");
+//     } else {
+//         alert("wrong");
+//     }
+//     console.log(potentialMultChoice2.textContent);
+//     console.log(potentialQuestions[currentMultChoice].answer);
+    
+//   });
+
+//   potentialMultChoice3.addEventListener("click", function(){
+
+//     if (potentialMultChoice3.textContent === potentialQuestions[currentMultChoice].answer) {
+//         alert("right");
+//     } else {
+//         alert("wrong");
+//     }
+//     console.log(potentialMultChoice3.textContent);
+//     console.log(potentialQuestions[currentMultChoice].answer);
+    
+//   });
+
+//   potentialMultChoice4.addEventListener("click", function(){
+
+//     if (potentialMultChoice4.textContent === potentialQuestions[currentMultChoice].answer) {
+//         alert("right");
+//     } else {
+//         alert("wrong");
+//     }
+//     console.log(potentialMultChoice4.textContent);
+//     console.log(potentialQuestions[currentMultChoice].answer);
+    
+//   });
