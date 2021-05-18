@@ -1,11 +1,6 @@
 const startBtn = document.querySelector('#startBtn');
 const multipleChoiceQuestion = document.querySelector('#questionContainer');
 const choices = Array.from(document.querySelectorAll('#choice'));
-// const potentialMultChoice1 = document.querySelector('#choice1');
-// const potentialMultChoice2 = document.querySelector('#choice2');
-// const potentialMultChoice3 = document.querySelector('#choice3');
-// const potentialMultChoice4 = document.querySelector('#choice4');
-const nextBtn = document.querySelector('#next');
 const timer = document.querySelector('#timer'); //setInterval()
 const scoreNumber = document.querySelector('#score');
 
@@ -115,117 +110,50 @@ startGame = () => {
 
 newQuestion = () => {
 
-    if(potentialQuestions.length === 0 || questionCounter > numberOfQuestions){
+    if(questionsToChooseFrom.length === 0 || questionCounter > numberOfQuestions){
         localStorage.setItem('lastScore', score)
 
         return window.location.assign('/highscores.html')
     }
-}
 
-function setQuestion(){
+    questionCounter++
 
+    const questionIndex = Math.floor(Math.random() * questionsToChooseFrom.length)
+    currentQuestion = questionsToChooseFrom[questionIndex]
+    multipleChoiceQuestion.innerText = currentQuestion.question
 
-    // multipleChoiceQuestion.textContent = potentialQuestions[currentQuestion].question
-    // currentQuestion += 1
+    choices.forEach(choice => {
+        const number = choice.dataset['number']
+        choice.innerText = currentQuestion['choice' + number]
+    })
 
+    questionsToChooseFrom.splice(questionIndex, 1)
 
-    // potentialMultChoice1.textContent = potentialQuestions[currentMultChoice].choice1
-    // potentialMultChoice2.textContent = potentialQuestions[currentMultChoice].choice2
-    // potentialMultChoice3.textContent = potentialQuestions[currentMultChoice].choice3
-    // potentialMultChoice4.textContent = potentialQuestions[currentMultChoice].choice4
-    // currentMultChoice += 1
-
-
-
-    //let newQuestion = Math.floor(Math.random()*potentialQuestions.length)
-   // currentQuestion = potentialQuestions[newQuestion]
+    rightAnswer = true
 
 }
 
-function nextQuestion(){
-    
-    
-    nextBtn.addEventListener("click", setQuestion);
+choices.forEach(choice => {
+    choice.addEventListener('click', e => {
+        if(!rightAnswer) {
+            newQuestion()
+        } 
 
+        rightAnswer = false
+        const selectedChoice = e.target
+        const selectedAnswer = selectedChoice.dataset['number']
+
+        if (selectedAnswer == currentQuestion.answer){
+            incrementScore(scorePoints)
+            newQuestion()
+        }
+
+    })
+})
+
+incrementScore = (number) => {
+    score +=number
+    scoreNumber.innerText = score
 }
 
-function checkQuestion(){
-
-    
-    // for (let index = 0; index < potentialQuestions.length; index++) {
-        
-    //     if (potentialMultChoice1.textContent === potentialQuestions[index].answer ||potentialMultChoice2.textContent === potentialQuestions[index].answer || potentialMultChoice3.textContent === potentialQuestions[index].answer || potentialMultChoice4.textContent === potentialQuestions[index].answer) {
-    //         score += 1;
-    //         scoreNumber.textContent = score
-    //     } else {
-    //         score -= 1;
-    //         scoreNumber.textContent = score
-            
-    // } console.log(potentialQuestions[index].answer)
-    //     }
-}
-
-function multChoiceBtn () {
-
-    // potentialMultChoice1.addEventListener("click", checkQuestion);
-    // potentialMultChoice2.addEventListener("click", checkQuestion);
-    // potentialMultChoice3.addEventListener("click", checkQuestion);
-    // potentialMultChoice4.addEventListener("click", checkQuestion);
-
-}
-
-// setQuestion();
-// multChoiceBtn();
-// nextQuestion();
-
-
-
-// in if statements if get right increment score 
-//take away time if wrong
-
-
-// potentialMultChoice1.addEventListener("click", function(){
-
-
-//     if (potentialMultChoice1.textContent === potentialQuestions[currentMultChoice].answer) {
-//         alert("right");
-//     } else {
-//         alert("wrong");
-//     }
-//   })
-
-//   potentialMultChoice2.addEventListener("click", function(){
-
-//     if (potentialMultChoice2.textContent === potentialQuestions[currentMultChoice].answer) {
-//         alert("right");
-//     } else {
-//         alert("wrong");
-//     }
-//     console.log(potentialMultChoice2.textContent);
-//     console.log(potentialQuestions[currentMultChoice].answer);
-    
-//   });
-
-//   potentialMultChoice3.addEventListener("click", function(){
-
-//     if (potentialMultChoice3.textContent === potentialQuestions[currentMultChoice].answer) {
-//         alert("right");
-//     } else {
-//         alert("wrong");
-//     }
-//     console.log(potentialMultChoice3.textContent);
-//     console.log(potentialQuestions[currentMultChoice].answer);
-    
-//   });
-
-//   potentialMultChoice4.addEventListener("click", function(){
-
-//     if (potentialMultChoice4.textContent === potentialQuestions[currentMultChoice].answer) {
-//         alert("right");
-//     } else {
-//         alert("wrong");
-//     }
-//     console.log(potentialMultChoice4.textContent);
-//     console.log(potentialQuestions[currentMultChoice].answer);
-    
-//   });
+startGame();
