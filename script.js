@@ -113,7 +113,7 @@ newQuestion = () => {
     if(questionsToChooseFrom.length === 0 || questionCounter > numberOfQuestions){
         localStorage.setItem('lastScore', score)
 
-        return window.location.assign('/highscores.html')
+        return window.location.assign('highscores.html')
     }
 
     questionCounter++
