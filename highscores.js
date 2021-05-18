@@ -34,10 +34,7 @@ saveHighScore = event => {
 
     localStorage.setItem('highscores', JSON.stringify(highscores))
 
-    highscoreDisplay.innerText = highscores
-
-    // window.location.assign('startPage.html')
-    
+    highscoreDisplay.innerText = highscores    
 }
 
 
