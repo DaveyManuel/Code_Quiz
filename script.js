@@ -1,20 +1,22 @@
 const startBtn = document.querySelector('#startBtn');
 const multipleChoiceQuestion = document.querySelector('#questionContainer');
-const potentialMultChoice1 = document.querySelector('#choice1');
-const potentialMultChoice2 = document.querySelector('#choice2');
-const potentialMultChoice3 = document.querySelector('#choice3');
-const potentialMultChoice4 = document.querySelector('#choice4');
-const nextBtn = document.querySelector('#next')
+const choices = Array.from(document.querySelectorAll('#choice'));
+// const potentialMultChoice1 = document.querySelector('#choice1');
+// const potentialMultChoice2 = document.querySelector('#choice2');
+// const potentialMultChoice3 = document.querySelector('#choice3');
+// const potentialMultChoice4 = document.querySelector('#choice4');
+const nextBtn = document.querySelector('#next');
 const timer = document.querySelector('#timer'); //setInterval()
 const scoreNumber = document.querySelector('#score');
 
 
-let rightAnswer = true; //???
+let rightAnswer = true; 
 let score = 0;
-let questionCounter = 0; //???
-let questionsToChooseFrom = []; //???
-let currentQuestion = 0;
-let currentMultChoice = 0; 
+let questionCounter = 0; 
+let questionsToChooseFrom = []; 
+let currentQuestion = {};
+
+console.log(choices)
 
 
 let potentialQuestions = [
@@ -24,7 +26,7 @@ let potentialQuestions = [
         choice2: 'Array',
         choice3: 'Let',
         choice4: 'Const',
-        answer: 'Array',
+        answer: 2,
     },
     {
         question: 'What word is used to complete an if statement?',
@@ -32,7 +34,7 @@ let potentialQuestions = [
         choice2: 'while',
         choice3: 'else',
         choice4: 'else if',
-        answer: 'else',
+        answer: 3,
     },
     {
         question: 'What kind of operator is used to describe if a value is true or false?',
@@ -40,7 +42,7 @@ let potentialQuestions = [
         choice2: 'String',
         choice3: 'Number',
         choice4: 'Object',
-        answer: 'Boolean',
+        answer: 1,
     },
     {
         question: 'What JavaScript method do we use in order to turn a string into an integer?',
@@ -48,7 +50,7 @@ let potentialQuestions = [
         choice2: 'concat',
         choice3: 'parseInt',
         choice4: 'toUpperCase',
-        answer: 'parseInt',
+        answer: 3,
     },
     {
         question: 'To successfully create a function, one must end the function with a ',
@@ -56,7 +58,7 @@ let potentialQuestions = [
         choice2: 'parenthesis ()',
         choice3: 'bracket []',
         choice4: 'period .',
-        answer: 'curly brace {}',
+        answer: 1,
     },
     {
         question: 'This function is primarily used for debugging purposes:',
@@ -64,7 +66,7 @@ let potentialQuestions = [
         choice2: 'printInfo',
         choice3: 'find',
         choice4: 'console.log',
-        answer: 'console.log',
+        answer: 4,
     },
     {
         question: 'To refactor code is to...',
@@ -72,7 +74,7 @@ let potentialQuestions = [
         choice2: 'organize code',
         choice3: 'simplify code',
         choice4: 'all of the above',
-        answer: 'all of the above',
+        answer: 4,
     },
     {
         question: 'Which DOM method do we primarily use to select any element from our HTML',
@@ -80,7 +82,7 @@ let potentialQuestions = [
         choice2: 'querySelector',
         choice3: 'find',
         choice4: 'getElementbyId',
-        answer: 'querySelector',
+        answer: 2,
     },
     {
         question: 'The .setAttribute method is used to...',
@@ -88,7 +90,7 @@ let potentialQuestions = [
         choice2: 'link our JS with our HTML',
         choice3: 'add a class to an element', 
         choice4: 'none of the above',
-        answer: 'add a class to an element',
+        answer: 3,
     },
     {
         question: 'Which tag is used in HTML to link our JavaScript',
@@ -96,31 +98,44 @@ let potentialQuestions = [
         choice2: 'link',
         choice3: 'src',
         choice4: 'java',
-        answer: 'script',
+        answer: 1,
     },
 
 ]
 
-function startGame(){
+const scorePoints = 10
+const numberOfQuestions = 10
 
+startGame = () => {
+    questionCounter = 0
+    score = 0
+    questionsToChooseFrom = [...potentialQuestions]
+    newQuestion()
+}
 
-    
-    //console.log("start game");
+newQuestion = () => {
 
+    if(potentialQuestions.length === 0 || questionCounter > numberOfQuestions){
+        localStorage.setItem('lastScore', score)
+
+        return window.location.assign('/highscores.html')
+    }
 }
 
 function setQuestion(){
 
 
-    multipleChoiceQuestion.textContent = potentialQuestions[currentQuestion].question
-    currentQuestion += 1
+    // multipleChoiceQuestion.textContent = potentialQuestions[currentQuestion].question
+    // currentQuestion += 1
 
 
-    potentialMultChoice1.textContent = potentialQuestions[currentMultChoice].choice1
-    potentialMultChoice2.textContent = potentialQuestions[currentMultChoice].choice2
-    potentialMultChoice3.textContent = potentialQuestions[currentMultChoice].choice3
-    potentialMultChoice4.textContent = potentialQuestions[currentMultChoice].choice4
-    currentMultChoice += 1
+    // potentialMultChoice1.textContent = potentialQuestions[currentMultChoice].choice1
+    // potentialMultChoice2.textContent = potentialQuestions[currentMultChoice].choice2
+    // potentialMultChoice3.textContent = potentialQuestions[currentMultChoice].choice3
+    // potentialMultChoice4.textContent = potentialQuestions[currentMultChoice].choice4
+    // currentMultChoice += 1
+
+
 
     //let newQuestion = Math.floor(Math.random()*potentialQuestions.length)
    // currentQuestion = potentialQuestions[newQuestion]
@@ -132,39 +147,36 @@ function nextQuestion(){
     
     nextBtn.addEventListener("click", setQuestion);
 
-    //console.log("next question");
-    //multipleChoiceQuestion = "David Sanchez"
-    //functionality for next button
-
 }
 
 function checkQuestion(){
 
     
-    for (let index = 0; index < potentialQuestions.length; index++) {
+    // for (let index = 0; index < potentialQuestions.length; index++) {
         
-        if (potentialMultChoice1.textContent === potentialQuestions[index].answer || potentialMultChoice2.textContent === potentialQuestions[index].answer || potentialMultChoice3.textContent === potentialQuestions[index].answer || potentialMultChoice4.textContent === potentialQuestions[index].answer) {
-            score += 1;
-            scoreNumber.textContent = score
-        } else {
+    //     if (potentialMultChoice1.textContent === potentialQuestions[index].answer ||potentialMultChoice2.textContent === potentialQuestions[index].answer || potentialMultChoice3.textContent === potentialQuestions[index].answer || potentialMultChoice4.textContent === potentialQuestions[index].answer) {
+    //         score += 1;
+    //         scoreNumber.textContent = score
+    //     } else {
+    //         score -= 1;
+    //         scoreNumber.textContent = score
             
-        
-    }
-        }
+    // } console.log(potentialQuestions[index].answer)
+    //     }
 }
 
 function multChoiceBtn () {
 
-    potentialMultChoice1.addEventListener("click", checkQuestion);
-    potentialMultChoice2.addEventListener("click", checkQuestion);
-    potentialMultChoice3.addEventListener("click", checkQuestion);
-    potentialMultChoice4.addEventListener("click", checkQuestion);
+    // potentialMultChoice1.addEventListener("click", checkQuestion);
+    // potentialMultChoice2.addEventListener("click", checkQuestion);
+    // potentialMultChoice3.addEventListener("click", checkQuestion);
+    // potentialMultChoice4.addEventListener("click", checkQuestion);
 
 }
 
-setQuestion();
-multChoiceBtn();
-nextQuestion();
+// setQuestion();
+// multChoiceBtn();
+// nextQuestion();
 
 
 
